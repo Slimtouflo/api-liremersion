@@ -1,5 +1,6 @@
 const SoundController = require("../controllers/sound");
 const CategoryController = require("../controllers/category");
+const UserController = require("../controllers/user");
 
 module.exports = server => {
     server.get("/", (req, res) => {
@@ -41,5 +42,21 @@ module.exports = server => {
 
     server.delete("/categories/:id", (req, res) => {
         CategoryController.delete(req, res);
+    });
+
+    server.get("/users", (req, res) => {
+        UserController.getAll(req, res);
+    });
+
+    server.get("/users/:id", (req, res) => {
+        UserController.get(req, res);
+    });
+
+    server.post("/users", (req, res) => {
+        UserController.create(req, res);
+    });
+
+    server.delete("/users/:id", (req, res) => {
+        UserController.delete(req, res);
     });
 }
