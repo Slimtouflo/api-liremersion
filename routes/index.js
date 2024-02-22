@@ -1,6 +1,29 @@
 const SoundController = require("../controllers/sound");
 const CategoryController = require("../controllers/category");
 const UserController = require("../controllers/user");
+const category = require('../models/category');
+const sound = require('../models/sound');
+const user = require('../models/user');
+
+
+category.find({})
+  .populate('soundId')
+  .then(category => {
+    console.log(category);
+  });
+
+sound.find({})
+  .populate('catId')
+  .then(sound => {
+    console.log(sound);
+  });
+
+user.find({})
+  .populate('favs')
+  .then(sound => {
+    console.log(sound);
+  });
+
 
 module.exports = server => {
     server.get("/", (req, res) => {
