@@ -26,6 +26,7 @@ user.find({})
 
 
 module.exports = server => {
+
     server.get("/", (req, res) => {
         console.log("Bienvenue sur la page d'accueil de l'api LireMersion");
 
@@ -33,6 +34,25 @@ module.exports = server => {
             message: "Bienvenue sur la page d'accueil de l'api LireMersion"
         });
     });
+
+    server.post('/register', async (req, res) => {
+        try {
+            const { user, pwd } = req.body;
+            // Check if user already exists
+            const existingUser = await user.findOne({ user });
+            if (existingUser) {
+                return res.status(409).json({ error: 'Utilisateur déjà existant' });
+            }
+            // Create new user
+            const newUser = new user({ name, password });
+            await newUser.save();
+            res.status(201).json({ message: 'Enregistrement réussi !' });
+        } catch (error) {
+            console.error(error);
+            res.status(500).json({ error: 'Erreur' });
+        }
+    });
+
 
     server.get("/sounds", (req, res) => {
         SoundController.getAll(req, res);

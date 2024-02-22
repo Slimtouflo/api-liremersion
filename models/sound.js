@@ -7,6 +7,7 @@ const SoundSchema = new Schema({
     listened: Number,
     uploadDate: Date,
     image: String,
+    colorId: String
 });
 
 const SoundModel = mongoose.model("sound", SoundSchema);

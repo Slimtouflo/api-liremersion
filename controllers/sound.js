@@ -23,7 +23,8 @@ module.exports = {
             duration: req.body.duration,
             listened: req.body.listened,
             uploadDate: new Date(req.body.uploadDate),
-            image: req.body.image
+            image: req.body.image,
+            colorId: req.body.colorId
         });
 
         sound.save().then(() => {
