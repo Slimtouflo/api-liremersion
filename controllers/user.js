@@ -18,7 +18,7 @@ module.exports = {
 
     create(req, res) {
         const user = new UserModel({
-            name: req.body.name,
+            username: req.body.username,
             password: req.body.password,
             favs: req.body.favorites
         });

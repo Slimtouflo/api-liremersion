@@ -37,12 +37,14 @@ module.exports = server => {
         });
     });
 
-    server.post("/signup", (req, res) => {
+    //Fonction gérant l'enregistrement
+    server.post("/users/signup", (req, res) => {
         if (!checkBody(req.body, ["username", "password"])) {
-            res.json({ result: false, error: "Missing or empty fields" });
+            res.json({ result: false, error: "Champs invalides ou vides" });
             return;
         }
         const hash = bcrypt.hashSync(req.body.password, 10);
+
         // si la valeur n'existe pas dans la BDD, le result est true
         user.findOne({ username: req.body.username}).then((data) => {
             if (data === null) {
@@ -65,13 +67,14 @@ module.exports = server => {
     });
 
     // signin de la page login
-    server.post("/signin", (req, res) => {
+    server.post("/users/signin", (req, res) => {
         console.log(req.body.username, req.body.password);
         if (!checkBody(req.body, ["username", "password"])) {
-            res.json({ result: false, error: "Missing or empty fields" });
+            res.json({ result: false, error: "Champs invalides ou vides" });
             return;
         }
         const hash = bcrypt.hashSync(req.body.password, 10);
+
         // si la valeur existe dans la BDD, le result est true
         user.findOne({ username: req.body.username }).then((data) => {
             if (data && bcrypt.compareSync(req.body.password, data.password)) {
