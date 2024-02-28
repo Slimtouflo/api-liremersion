@@ -2,7 +2,7 @@ const CategoryModel = require("../models/category");
 
 module.exports = {
     getAll(req, res) {
-        CategoryModel.find().then(category => {
+        CategoryModel.find().populate("soundId").then(category => {
             res.send(category);
         });
     },
@@ -11,7 +11,7 @@ module.exports = {
         const id = req.params.id;
         console.log("Récupartion de la catégorie avec l'id", id);
 
-        CategoryModel.findById(id).then(category => {
+        CategoryModel.findById(id).populate("soundId").then(category => {
             res.send(category);
         });
     },

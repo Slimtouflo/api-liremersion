@@ -2,7 +2,7 @@ const SoundModel = require("../models/sound");
 
 module.exports = {
     getAll(req, res) {
-        SoundModel.find().then(sounds => {
+        SoundModel.find().populate("catId").then(sounds => {
             res.send(sounds);
         });
     },
@@ -11,7 +11,7 @@ module.exports = {
         const id = req.params.id;
         console.log("Récupération du son avec l'id", id);
 
-        SoundModel.findById(id).then(sounds => {
+        SoundModel.findById(id).populate("catId").then(sounds => {
             res.send(sounds);
         });
     },
