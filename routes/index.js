@@ -101,6 +101,10 @@ module.exports = server => {
         CategoryController.getAll(req, res);
     });
 
+    server.get("/categories/:id", (req, res) => {
+        CategoryController.get(req, res);
+    });
+
     server.get("/users", (req, res) => {
         UserController.getAll(req, res);
     });
