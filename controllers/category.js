@@ -9,7 +9,7 @@ module.exports = {
 
     get(req, res) {
         const id = req.params.id;
-        console.log("Récupartion de la catégorie avec l'id", id);
+        console.log("Récupération de la catégorie avec l'id", id);
 
         CategoryModel.findById(id).populate("soundId").then(category => {
             res.send(category);
